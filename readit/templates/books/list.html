@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Readit | Books List</title>
+</head>
+<body>
+
+<h2>Book List</h2>
+{% if request.user.is_authenticated %}
+	<p>Hello {{ request.user.username|title }} . Welcome back! You were last logged in at {{ request.user.last_login|date:"D d M Y" }}</p>
+{% else %}
+	<p>Welcome Anonymous User</p>
+{% endif %}
+
+</body>
+</html>
