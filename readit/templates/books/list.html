@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load humanize %}
 <html>
 <head>
 	<title>Readit | Books List</title>
@@ -11,6 +12,25 @@
 {% else %}
 	<p>Welcome Anonymous User</p>
 {% endif %}
+
+<main>
+	<h1>
+		{% comment %}
+		From humanize apnumber
+		Reference:	https://docs.djangoproject.com/en/1.9/ref/templates/builtins/
+		{% endcomment %}
+		{{ books.count|apnumber|title }} book{{ books.count|pluralize }}
+	</h1>
+
+	{% for book in books %}
+		<h2>{{ book.title }} by {{ book.list_authors }}</h2>
+		{% if book.is_favorite %}
+			<span class="highlight">favorite</span>
+		{% endif %}
+		{{ book.review }}
+		<p>Reviewed on {{ book.date_reviewed|date:"l jS F Y, P"}}</p>
+	{% endfor %}
+</main>
 
 </body>
 </html>
