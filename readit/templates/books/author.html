@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Readit | Author</title>
-</head>
-<body>
-	{{ author.name }}
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+
+	<h2>{{ author.name }}</h2>
 	{% for book in author.books.all %}
 		{% if book.review %}
 			<div class="book">
-				<h3>{{ book.title }}</h3>
+				<h3><a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a></h3>
 				{% if book.is_favorite %}
-					<p class="highlight">favorite</p>
+					<span class="highlight">favorite</span>
 				{% endif %}
 				<p>{{ book.review|linebreaks }}</p>
 			</div>
 		{% endif %}
 	{% endfor %}
-</body>
-</html>
+
+{% endblock %}

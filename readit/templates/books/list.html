@@ -1,19 +1,7 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load humanize %}
-<html>
-<head>
-	<title>Readit | Books List</title>
-</head>
-<body>
 
-<h2>Book List</h2>
-{% if request.user.is_authenticated %}
-	<p>Hello {{ request.user.username|title }} . Welcome back! You were last logged in at {{ request.user.last_login|date:"D d M Y" }}</p>
-{% else %}
-	<p>Welcome Anonymous User</p>
-{% endif %}
-
-<main>
+{% block content %}
 	<h1>
 		{% comment %}
 		From humanize apnumber
@@ -23,14 +11,11 @@
 	</h1>
 
 	{% for book in books %}
-		<h2>{{ book.title }} by {{ book.list_authors }}</h2>
+		<h2><a href="{% url 'book-detail' book.pk %}">{{ book.title }} by {{ book.list_authors }}</a></h2>
 		{% if book.is_favorite %}
 			<span class="highlight">favorite</span>
 		{% endif %}
 		{{ book.review }}
 		<p>Reviewed on {{ book.date_reviewed|date:"l jS F Y, P"}}</p>
 	{% endfor %}
-</main>
-
-</body>
-</html>
+{% endblock %}
