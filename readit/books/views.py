@@ -41,6 +41,8 @@ class AuthorList(View):
 
 
 class BookDetail(DetailView):
+    # For Detailed view django auto assigns context variable as book w.r.t.
+    # the model name
     model = Book
     template_name = "books/book.html"
 
